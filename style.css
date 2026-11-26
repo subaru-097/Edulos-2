@@ -2008,3 +2008,44 @@ button.sp-full { border: 0; color: #fff; font: inherit; font-size: 11.5px; font-
 /* seção 2: começa no mesmo azul-noite em que o topo termina e escurece até o preto fosco */
 #appSection { background: linear-gradient(180deg, #090e1c 0%, #080c18 22%, #07090f 55%, #050506 100%) !important; }
 #appSection::before { background: linear-gradient(115deg, rgba(255,255,255,0) 30%, rgba(255,255,255,.04) 45%, rgba(255,255,255,0) 58%), radial-gradient(70% 45% at 50% 0%, rgba(40,70,130,.05), rgba(40,70,130,0) 70%), radial-gradient(60% 40% at 50% 100%, rgba(197,160,89,.08), rgba(197,160,89,0) 70%); }
+
+/* A câmera se aproxima do andar clicado: a cena cresce, e as etiquetas e botões da torre somem para não crescerem junto */
+.tower-hero.is-zooming { overflow: clip; z-index: 100; }
+/* o transform cria uma camada própria: sem o z-index, a cena dos celulares (seção do app) aparece por cima durante o zoom */
+.tower-hero.is-zooming .floor-tip,
+.tower-hero.is-zooming .zone-mark,
+.tower-hero.is-zooming .tower-hint,
+.tower-hero.is-zooming .floor-pick,
+.tower-hero.is-zooming .obra-skip,
+.tower-hero.is-zooming .obra-caption,
+.tower-hero.is-zooming .hero-sweep { opacity: 0 !important; pointer-events: none; transition: opacity .25s ease; }
+
+/* Todos os andares: no toque, a fileira de andares rola para o lado (28 botões não cabem na largura) */
+.fp-chips { justify-content: flex-start; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity; scrollbar-width: none; padding: 2px 14px;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 16px, #000 calc(100% - 16px), transparent); mask-image: linear-gradient(90deg, transparent, #000 16px, #000 calc(100% - 16px), transparent); }
+.fp-chips::-webkit-scrollbar { display: none; }
+.fp-chip { flex: 0 0 52px; max-width: none; scroll-snap-align: center; }
+/* Corte seco: a câmera chega perto do andar e a planta entra na hora, já se assentando (sem escurecer antes) */
+.ap-tour.corte, .ap-tour.corte.is-open { transition: opacity .12s linear, visibility 0s; }
+.ap-tour.corte .ap-plan, .ap-tour.corte .ap-plan.is-in { transition: none; }
+.ap-tour.corte .ap-plan:not(.is-in) .plan-model { transform: scale(.94); filter: none; opacity: 1; }
+
+/* Planta que gira: fundo branco (o vídeo da maquete é sobre branco), arrastar gira, soltar volta para a frente */
+.plan-stage { background: #fff; }
+.ap-plan .plan-model { aspect-ratio: 16 / 9; width: min(100%, calc((100vh - 180px) * 1.778)); touch-action: pan-y; cursor: grab; }
+.ap-plan .plan-model.is-grab { cursor: grabbing; }
+.plan-giro { position: absolute; inset: 0; width: 100%; height: 100%; display: block; opacity: 0; pointer-events: none; }
+.plan-model.girando .plan-giro { opacity: 1; }
+.plan-model.girando .plan-img, .plan-model.girando .plan-svg { opacity: 0; }
+.plan-model.girando .plan-pins { visibility: hidden; }
+.ap-plan .plan-img { -webkit-mask-image: none; mask-image: none; }
+.plan-model.has-hover .plan-img { filter: saturate(.7) brightness(.96); }
+.pl-area.is-on { stroke: #C5A059; fill: rgba(197,160,89,.14); }
+.plan-mar { display: none; }
+.plan-hint { color: rgba(20,17,11,.6); }
+.plan-hint i { color: #A9853F; }
+.plan-close { color: #14110b; background: rgba(255,255,255,.85); border-color: rgba(20,17,11,.14); }
+@media (max-width: 900px), (orientation: portrait) and (max-width: 1100px) {
+  .ap-plan .plan-model { width: 100%; }
+  .plan-close { color: #14110b; background: rgba(255,255,255,.9); }
+}

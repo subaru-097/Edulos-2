@@ -147,17 +147,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const N_ANDARES = F.lajes.length - 1;
   const M = 'midia/tour/';
 
-  // só os andares altos entram no passeio (dados de exemplo: o cliente confirma status e valores)
-  const PRIMEIRO = 17, ULTIMO = 23;
-  const UNID = {
-    17: { st: 'disp', preco: 'R$ 8,6 mi' },
-    18: { st: 'res', preco: 'R$ 8,8 mi' },
-    19: { st: 'disp', preco: 'R$ 8,9 mi' },
-    20: { st: 'vend', preco: 'R$ 9,1 mi' },
-    21: { st: 'disp', preco: 'R$ 9,3 mi' },
-    22: { st: 'disp', preco: 'R$ 9,5 mi' },
-    23: { st: 'res', preco: 'R$ 9,8 mi' },
-  };
+  // todos os andares entram no passeio, do 1º ao último (dados de exemplo: o cliente confirma status e valores)
+  const PRIMEIRO = 1, ULTIMO = N_ANDARES;
+  const UNID = {};
+  [
+    ['disp', '5,4'], ['vend', '5,5'], ['disp', '5,7'], ['vend', '5,8'], ['disp', '6,0'], ['res', '6,1'], ['disp', '6,3'],
+    ['vend', '6,4'], ['disp', '6,6'], ['disp', '6,8'], ['res', '7,0'], ['disp', '7,1'], ['vend', '7,3'], ['disp', '7,5'],
+    ['disp', '7,9'], ['disp', '8,2'], ['disp', '8,6'], ['res', '8,8'], ['disp', '8,9'], ['vend', '9,1'], ['disp', '9,3'],
+    ['disp', '9,5'], ['res', '9,8'], ['disp', '10,0'], ['vend', '10,3'], ['disp', '10,6'], ['res', '11,0'], ['disp', '12,5'],
+  ].forEach(([st, v], i) => { UNID[i + 1] = { st, preco: 'R$ ' + v + ' mi' }; });
   const ST = { disp: 'Disponível', res: 'Reservado', vend: 'Vendido' };
   const apto = (a) => a + '1';
   const pinta = (el, a) => { el.textContent = ST[UNID[a].st]; el.dataset.st = UNID[a].st; };
@@ -179,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
   svg.appendChild(dim);
   const LUZ = {};
   // posição de cada recorte no quadro do vídeo (gerado junto com as imagens; fica no código para abrir até sem servidor)
-  const RECORTES = {"d":[{"andar":17,"arq":"andar-17-d.webp","x":791.0,"y":435.0,"w":338.0,"h":41.0},{"andar":18,"arq":"andar-18-d.webp","x":791.0,"y":408.0,"w":338.0,"h":43.0},{"andar":19,"arq":"andar-19-d.webp","x":791.0,"y":378.0,"w":338.0,"h":46.0},{"andar":20,"arq":"andar-20-d.webp","x":791.0,"y":354.0,"w":338.0,"h":40.0},{"andar":21,"arq":"andar-21-d.webp","x":791.0,"y":325.0,"w":338.0,"h":45.0},{"andar":22,"arq":"andar-22-d.webp","x":791.0,"y":298.0,"w":338.0,"h":43.0},{"andar":23,"arq":"andar-23-d.webp","x":791.0,"y":271.0,"w":338.0,"h":43.0}],"m":[{"andar":17,"arq":"andar-17-m.webp","x":416.0,"y":807.0,"w":331.0,"h":79.0},{"andar":18,"arq":"andar-18-m.webp","x":416.0,"y":771.5,"w":331.0,"h":76.0},{"andar":19,"arq":"andar-19-m.webp","x":416.0,"y":732.5,"w":331.0,"h":77.0},{"andar":20,"arq":"andar-20-m.webp","x":416.0,"y":693.0,"w":331.0,"h":78.5},{"andar":21,"arq":"andar-21-m.webp","x":416.0,"y":655.5,"w":331.0,"h":79.5},{"andar":22,"arq":"andar-22-m.webp","x":416.0,"y":618.0,"w":331.0,"h":80.0},{"andar":23,"arq":"andar-23-m.webp","x":416.0,"y":581.0,"w":331.0,"h":81.0}]};
+  const RECORTES = {"d":[{"andar":1,"arq":"andar-1-d.webp","x":791,"y":885,"w":338,"h":45},{"andar":2,"arq":"andar-2-d.webp","x":791,"y":856,"w":338,"h":47},{"andar":3,"arq":"andar-3-d.webp","x":791,"y":827,"w":338,"h":47},{"andar":4,"arq":"andar-4-d.webp","x":791,"y":798,"w":338,"h":47},{"andar":5,"arq":"andar-5-d.webp","x":791,"y":768,"w":338,"h":48},{"andar":6,"arq":"andar-6-d.webp","x":791,"y":739,"w":338,"h":47},{"andar":7,"arq":"andar-7-d.webp","x":791,"y":711,"w":338,"h":46},{"andar":8,"arq":"andar-8-d.webp","x":791,"y":683,"w":338,"h":46},{"andar":9,"arq":"andar-9-d.webp","x":791,"y":655,"w":338,"h":46},{"andar":10,"arq":"andar-10-d.webp","x":791,"y":627,"w":338,"h":46},{"andar":11,"arq":"andar-11-d.webp","x":791,"y":599,"w":338,"h":46},{"andar":12,"arq":"andar-12-d.webp","x":791,"y":571,"w":338,"h":46},{"andar":13,"arq":"andar-13-d.webp","x":791,"y":543,"w":338,"h":46},{"andar":14,"arq":"andar-14-d.webp","x":791,"y":516,"w":338,"h":45},{"andar":15,"arq":"andar-15-d.webp","x":791,"y":487,"w":338,"h":47},{"andar":16,"arq":"andar-16-d.webp","x":791,"y":459,"w":338,"h":46},{"andar":17,"arq":"andar-17-d.webp","x":791,"y":434,"w":338,"h":43},{"andar":18,"arq":"andar-18-d.webp","x":791,"y":407,"w":338,"h":45},{"andar":19,"arq":"andar-19-d.webp","x":791,"y":377,"w":338,"h":48},{"andar":20,"arq":"andar-20-d.webp","x":791,"y":353,"w":338,"h":42},{"andar":21,"arq":"andar-21-d.webp","x":791,"y":324,"w":338,"h":47},{"andar":22,"arq":"andar-22-d.webp","x":791,"y":297,"w":338,"h":45},{"andar":23,"arq":"andar-23-d.webp","x":791,"y":270,"w":338,"h":45},{"andar":24,"arq":"andar-24-d.webp","x":791,"y":244,"w":338,"h":44},{"andar":25,"arq":"andar-25-d.webp","x":791,"y":218,"w":338,"h":44},{"andar":26,"arq":"andar-26-d.webp","x":791,"y":191,"w":338,"h":45},{"andar":27,"arq":"andar-27-d.webp","x":791,"y":166,"w":338,"h":43},{"andar":28,"arq":"andar-28-d.webp","x":791,"y":145,"w":338,"h":39}],"m":[{"andar":1,"arq":"andar-1-m.webp","x":416,"y":1493,"w":331,"h":86},{"andar":2,"arq":"andar-2-m.webp","x":416,"y":1455,"w":331,"h":75},{"andar":3,"arq":"andar-3-m.webp","x":416,"y":1412,"w":331,"h":79},{"andar":4,"arq":"andar-4-m.webp","x":416,"y":1370,"w":331,"h":76},{"andar":5,"arq":"andar-5-m.webp","x":416,"y":1326,"w":331,"h":76},{"andar":6,"arq":"andar-6-m.webp","x":416,"y":1284,"w":331,"h":74},{"andar":7,"arq":"andar-7-m.webp","x":416,"y":1248,"w":331,"h":66},{"andar":8,"arq":"andar-8-m.webp","x":416,"y":1204,"w":331,"h":73},{"andar":9,"arq":"andar-9-m.webp","x":416,"y":1153,"w":331,"h":81},{"andar":10,"arq":"andar-10-m.webp","x":416,"y":1116,"w":331,"h":68},{"andar":11,"arq":"andar-11-m.webp","x":416,"y":1066,"w":331,"h":83},{"andar":12,"arq":"andar-12-m.webp","x":416,"y":1023,"w":331,"h":77},{"andar":13,"arq":"andar-13-m.webp","x":416,"y":982,"w":331,"h":76},{"andar":14,"arq":"andar-14-m.webp","x":416,"y":939,"w":331,"h":79},{"andar":15,"arq":"andar-15-m.webp","x":416,"y":894,"w":331,"h":83},{"andar":16,"arq":"andar-16-m.webp","x":416,"y":842,"w":331,"h":92},{"andar":17,"arq":"andar-17-m.webp","x":416,"y":801,"w":331,"h":85},{"andar":18,"arq":"andar-18-m.webp","x":416,"y":763,"w":331,"h":84},{"andar":19,"arq":"andar-19-m.webp","x":416,"y":722,"w":331,"h":90},{"andar":20,"arq":"andar-20-m.webp","x":416,"y":681,"w":331,"h":92},{"andar":21,"arq":"andar-21-m.webp","x":416,"y":643,"w":331,"h":92},{"andar":22,"arq":"andar-22-m.webp","x":416,"y":603,"w":331,"h":95},{"andar":23,"arq":"andar-23-m.webp","x":416,"y":564,"w":331,"h":97},{"andar":24,"arq":"andar-24-m.webp","x":416,"y":523,"w":331,"h":102},{"andar":25,"arq":"andar-25-m.webp","x":416,"y":487,"w":331,"h":99},{"andar":26,"arq":"andar-26-m.webp","x":416,"y":443,"w":331,"h":110},{"andar":27,"arq":"andar-27-m.webp","x":416,"y":392,"w":331,"h":119},{"andar":28,"arq":"andar-28-m.webp","x":416,"y":355,"w":331,"h":108}]};
   (function () {
     const j = { andares: RECORTES[F.sfx] };
     j.andares.forEach((c) => {
@@ -191,10 +189,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (fase !== 'obra') carregaLuzes();
   })();
   function carregaLuzes() { Object.values(LUZ).forEach((im) => { if (!im.getAttribute('href')) im.setAttribute('href', im.dataset.src); }); }
-  // áreas de clique: só 17º a 23º
+  // áreas de clique, do 1º ao último andar. No computador a torre é vista de frente: um retângulo por andar.
+  // No vertical ela aparece de baixo, em perspectiva: as lajes inclinam, então cada andar é um polígono
+  // que acompanha a laje (mesma geometria do recorte aceso). [pontos, centro vertical na metade da fachada]
+  const CLIQUE_M = {"1":["426,1501 470,1504 520,1507 570,1510 620,1513 670,1516 704,1514 714,1515 714,1565 704,1564.5 670,1567.5 620,1563.5 570,1560 520,1556 470,1552.5 426,1549",1535.0],"2":["426,1463.5 470,1466 520,1468.5 570,1471 620,1474 670,1476.5 704,1475 714,1476 714,1515 704,1514 670,1516 620,1513 570,1510 520,1507 470,1504 426,1501",1490.6],"3":["426,1420.5 470,1422 520,1424.5 570,1426.5 620,1428.5 670,1430.5 704,1429.5 714,1431 714,1476 704,1475 670,1476.5 620,1474 570,1471 520,1468.5 470,1466 426,1463.5",1448.8],"4":["426,1378 470,1379.5 520,1381 570,1382.5 620,1384 670,1385.5 704,1385 714,1387 714,1431 704,1429.5 670,1430.5 620,1428.5 570,1426.5 520,1424.5 470,1422 426,1420.5",1404.4],"5":["426,1334.5 470,1335.5 520,1336.5 570,1337.5 620,1338.5 670,1339.5 704,1340 714,1342 714,1387 704,1385 670,1385.5 620,1384 570,1382.5 520,1381 470,1379.5 426,1378",1360.0],"6":["426,1292.5 470,1293 520,1293.5 570,1293.5 620,1294 670,1294.5 704,1295.5 714,1297.5 714,1342 704,1340 670,1339.5 620,1338.5 570,1337.5 520,1336.5 470,1335.5 426,1334.5",1315.7],"7":["426,1257 470,1257 520,1257 570,1257 620,1257 670,1257 704,1258.5 714,1261 714,1297.5 704,1295.5 670,1294.5 620,1294 570,1293.5 520,1293.5 470,1293 426,1292.5",1275.4],"8":["426,1215.5 470,1215 520,1214.5 570,1214 620,1213.5 670,1213 704,1215.5 714,1218 714,1261 704,1258.5 670,1257 620,1257 570,1257 520,1257 470,1257 426,1257",1235.6],"9":["426,1167.5 470,1166.5 520,1165.5 570,1164 620,1163 670,1162 704,1165 714,1167.5 714,1218 704,1215.5 670,1213 620,1213.5 570,1214 520,1214.5 470,1215 426,1215.5",1189.2],"10":["426,1133 470,1131.5 520,1130 570,1128.5 620,1127 670,1125.5 704,1129 714,1131.5 714,1167.5 704,1165 670,1162 620,1163 570,1164 520,1165.5 470,1166.5 426,1167.5",1146.3],"11":["426,1086 470,1084 520,1081.5 570,1079.5 620,1077.5 670,1075 704,1079.5 714,1082.5 714,1131.5 704,1129 670,1125.5 620,1127 570,1128.5 520,1130 470,1131.5 426,1133",1104.0],"12":["426,1045.5 470,1043 520,1040.5 570,1037.5 620,1035 670,1032.5 704,1037 714,1040.5 714,1082.5 704,1079.5 670,1075 620,1077.5 570,1079.5 520,1081.5 470,1084 426,1086",1058.6],"13":["426,1007 470,1004.5 520,1001 570,998 620,994.5 670,991.5 704,997 714,1000.5 714,1040.5 704,1037 670,1032.5 620,1035 570,1037.5 520,1040.5 470,1043 426,1045.5",1017.8],"14":["426,966.5 470,963.5 520,960 570,956 620,952.5 670,948.5 704,955 714,958.5 714,1000.5 704,997 670,991.5 620,994.5 570,998 520,1001 470,1004.5 426,1007",977.0],"15":["426,924.5 470,920.5 520,916.5 570,912 620,908 670,904 704,910.5 714,914.5 714,958.5 704,955 670,948.5 620,952.5 570,956 520,960 470,963.5 426,966.5",934.2],"16":["426,876 470,872 520,867 570,862 620,857.5 670,852.5 704,860 714,864 714,914.5 704,910.5 670,904 620,908 570,912 520,916.5 470,920.5 426,924.5",887.2],"17":["426,838 470,833 520,828 570,822.5 620,817 670,812 704,820 714,824.5 714,864 704,860 670,852.5 620,857.5 570,862 520,867 470,872 426,876",842.4],"18":["426,802.5 470,797.5 520,791.5 570,785.5 620,780 670,774 704,783 714,787.5 714,824.5 704,820 670,812 620,817 570,822.5 520,828 470,833 426,838",804.1],"19":["426,764 470,758.5 520,752 570,746 620,739.5 670,733.5 704,742.5 714,747.5 714,787.5 704,783 670,774 620,780 570,785.5 520,791.5 470,797.5 426,802.5",765.8],"20":["426,725.5 470,719.5 520,713 570,706 620,699.5 670,692.5 704,702.5 714,707.5 714,747.5 704,742.5 670,733.5 620,739.5 570,746 520,752 470,758.5 426,764",726.1],"21":["426,689.5 470,683 520,675.5 570,668.5 620,661 670,654 704,664.5 714,669.5 714,707.5 704,702.5 670,692.5 620,699.5 570,706 520,713 470,719.5 426,725.5",687.3],"22":["426,652 470,645 520,637.5 570,629.5 620,622 670,614.5 704,625.5 714,630.5 714,669.5 704,664.5 670,654 620,661 570,668.5 520,675.5 470,683 426,689.5",649.1],"23":["426,615.5 470,608.5 520,600 570,592 620,584 670,575.5 704,587 714,592.5 714,630.5 704,625.5 670,614.5 620,622 570,629.5 520,637.5 470,645 426,652",610.8],"24":["426,577 470,569.5 520,561 570,552 620,543.5 670,535 704,547 714,552.5 714,592.5 704,587 670,575.5 620,584 570,592 520,600 470,608.5 426,615.5",572.0],"25":["426,543.5 470,535.5 520,526.5 570,517.5 620,508.5 670,499.5 704,512 714,518 714,552.5 704,547 670,535 620,543.5 570,552 520,561 470,569.5 426,577",534.8],"26":["426,502.5 470,494 520,484 570,474.5 620,465 670,455.5 704,469 714,475 714,518 704,512 670,499.5 620,508.5 570,517.5 520,526.5 470,535.5 426,543.5",496.0],"27":["426,454 470,445 520,435 570,424.5 620,414.5 670,404 704,418.5 714,424.5 714,475 704,469 670,455.5 620,465 570,474.5 520,484 470,494 426,502.5",449.6],"28":["426,419.5 470,410.5 520,399.5 570,389 620,378.5 670,367.5 704,382.5 714,388.5 714,424.5 704,418.5 670,404 620,414.5 570,424.5 520,435 470,445 426,454",406.8]};
   for (let a = PRIMEIRO; a <= ULTIMO; a++) {
     const k = N_ANDARES - a;
-    svg.appendChild(el('rect', { class: 'andar', x: F.x0 - 10, width: F.x1 - F.x0 + 20, y: F.lajes[k], height: F.lajes[k + 1] - F.lajes[k], 'data-andar': a }));
+    if (F.sfx === 'm') svg.appendChild(el('polygon', { class: 'andar', points: CLIQUE_M[a][0], 'data-andar': a }));
+    else svg.appendChild(el('rect', { class: 'andar', x: F.x0 - 10, width: F.x1 - F.x0 + 20, y: F.lajes[k], height: F.lajes[k + 1] - F.lajes[k], 'data-andar': a }));
   }
 
   // ponto do quadro do vídeo → tela (o vídeo usa object-fit: cover, centralizado)
@@ -202,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const W = stage.clientWidth, H = stage.clientHeight, s = Math.max(W / F.w, H / F.h);
     return [(W - F.w * s) / 2 + x * s, (H - F.h * s) / 2 + y * s];
   }
-  const meio = (a) => { const k = N_ANDARES - a; return (F.lajes[k] + F.lajes[k + 1]) / 2; };
+  const meio = (a) => { if (F.sfx === 'm') return CLIQUE_M[a][1]; const k = N_ANDARES - a; return (F.lajes[k] + F.lajes[k + 1]) / 2; };
   // no computador o colchete fica à direita da torre; no toque, à esquerda (à direita não cabe o texto)
   function posZona() {
     const xr = mapa(F.xm, 0)[0], xl = mapa(F.x0, 0)[0], y0 = mapa(0, zy0)[1], y1 = mapa(0, zy1)[1];
@@ -256,7 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   document.getElementById('towerHint').addEventListener('click', () => entrar(21));
 
-  // toque: uma fileira com os sete andares; o andar escolhido acende na torre e mostra a ficha
+  // toque: uma fileira (rolável) com todos os andares; o andar escolhido acende na torre e mostra a ficha
   const fpChips = document.getElementById('fpChips'), fpCard = document.getElementById('fpCard');
   const fpN = document.getElementById('fpN'), fpS = document.getElementById('fpS'), fpSt = document.getElementById('fpSt');
   let escolhido = 0;
@@ -273,7 +275,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (fase === 'obra') paraTorre();
     escolhido = a;
     acende(a);
-    fpChips.querySelectorAll('.fp-chip').forEach((c) => { const on = +c.dataset.andar === a; c.classList.toggle('is-on', on); c.setAttribute('aria-pressed', on); });
+    fpChips.querySelectorAll('.fp-chip').forEach((c) => {
+      const on = +c.dataset.andar === a; c.classList.toggle('is-on', on); c.setAttribute('aria-pressed', on);
+      if (on) fpChips.scrollTo({ left: c.offsetLeft - (fpChips.clientWidth - c.offsetWidth) / 2, behavior: reduce ? 'auto' : 'smooth' });
+    });
     fpN.textContent = a + 'º andar';
     fpS.textContent = 'Apto ' + apto(a) + ' · 200 m² · ' + UNID[a].preco;
     pinta(fpSt, a);
@@ -289,7 +294,6 @@ document.addEventListener('DOMContentLoaded', () => {
     carregaLuzes();
     if (!reduce) hero.classList.add('do-sweep');
     posZona();
-    preparaIda();
   }
   vObra.addEventListener('timeupdate', () => {
     if (!vObra.duration) return;
@@ -348,6 +352,11 @@ document.addEventListener('DOMContentLoaded', () => {
     { id: 'banho-master', nome: 'Banho da suíte', area: '12 m²', desc: 'Banheira de imersão, cuba dupla e metais dourados.', pins: [[255, 640]], areas: [[[130, 405], [375, 405], [375, 600], [480, 600], [480, 772], [130, 772]]] },
     { id: 'suite-2', nome: 'Suítes 02 e 03', area: '22 m² cada', desc: 'Mais duas suítes no mesmo padrão, as duas com vista para o mar.', pins: [[1880, 420], [1705, 905]], areas: [[[1630, 215], [2122, 215], [2122, 600], [1630, 600]], [[1450, 708], [1962, 708], [1962, 1050], [1450, 1050]]] },
   ];
+  // planta que gira: sequência de quadros de um vídeo da maquete girando (fundo branco). O quadro de descanso
+  // (vista de frente) é o único com ambientes clicáveis; ao arrastar, a maquete gira e, ao soltar, volta para ele.
+  // pinos e áreas em pixels do quadro (1280 × 720)
+  const GIRO = { n: 127, rest: 63, w: 1280, h: 720, amb: {"sala":{"p":[[650,280]],"a":[[[505,255],[690,200],[745,178],[820,295],[735,330],[640,360],[560,345]]]},"jantar":{"p":[[740,352]],"a":[[[640,360],[735,330],[820,300],[850,325],[780,355],[700,395],[650,395]]]},"cozinha":{"p":[[400,410]],"a":[[[225,355],[450,288],[560,388],[560,425],[400,500],[345,510],[300,440]]]},"varanda":{"p":[[930,250]],"a":[[[620,70],[725,40],[1250,405],[1245,470],[1125,500],[1100,445],[1050,445],[975,360],[900,300],[820,250],[745,178],[700,110]]]},"suite-master":{"p":[[560,190]],"a":[[[430,175],[515,100],[610,72],[700,110],[745,178],[680,200],[510,255],[500,290],[455,215]]]},"banho-master":{"p":[[385,185]],"a":[[[295,160],[500,100],[515,105],[430,175],[455,215],[330,260],[300,210]]]},"suite-2":{"p":[[905,455],[530,565]],"a":[[[750,385],[900,300],[960,340],[1020,410],[1100,450],[900,550],[845,560],[770,470]],[[395,505],[540,450],[610,470],[700,600],[640,660],[550,700],[500,640],[450,560]]]}} };
+  const giroSrc = (k) => M + 'giro-' + (window.innerWidth < 900 ? 'm' : 'd') + '/' + String(k).padStart(3, '0') + '.webp';
   const DUR = 900, RAPIDO = 380, MERGULHO = 620, EASE = 'cubic-bezier(.22,1,.36,1)';
   const VEL = 2;   // rasante em dobro: a subida até o andar leva ~3 s
   let vigia = 0;   // se um vídeo travar (rede lenta), o passeio segue sem ele
@@ -379,8 +388,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // a planta: imagem, ambientes que acendem, pinos numerados e a lista do painel (montados uma vez)
   function montaPlanta() {
     if (planImg.getAttribute('src')) return;
-    const src = M + 'planta-3d-' + (window.innerWidth < 900 ? 'm' : 'd') + '.webp';
+    const src = giroSrc(GIRO.rest);
     planImg.src = src;
+    planSvg.setAttribute('viewBox', '0 0 ' + GIRO.w + ' ' + GIRO.h);
     const pdefs = el('defs', {});
     const fAcesa = el('filter', { id: 'fAcesa', 'color-interpolation-filters': 'sRGB' });
     fAcesa.appendChild(el('feComponentTransfer', {}));
@@ -389,17 +399,18 @@ document.addEventListener('DOMContentLoaded', () => {
     planSvg.appendChild(pdefs);
     const gLuz = el('g', { class: 'pl-luz' }), gHit = el('g', { class: 'pl-hit' });
     AMB.forEach((a, i) => {
-      const d = a.areas.map((ar) => 'M' + ar.map((p) => p.join(' ')).join('L') + 'Z').join('');
+      const G = GIRO.amb[a.id];
+      const d = G.a.map((ar) => 'M' + ar.map((p) => p.join(' ')).join('L') + 'Z').join('');
       const cp = el('clipPath', { id: 'cp-' + a.id }); cp.appendChild(el('path', { d })); pdefs.appendChild(cp);
-      const im = el('image', { width: PW, height: PH, 'clip-path': 'url(#cp-' + a.id + ')', filter: 'url(#fAcesa)', preserveAspectRatio: 'none', 'data-i': i });
+      const im = el('image', { width: GIRO.w, height: GIRO.h, 'clip-path': 'url(#cp-' + a.id + ')', filter: 'url(#fAcesa)', preserveAspectRatio: 'none', 'data-i': i });
       im.setAttribute('href', src);
       gLuz.appendChild(im);
       const hit = el('path', { d, 'data-i': i, class: 'pl-area', pathLength: 100 });
       gHit.appendChild(hit);
-      a.pins.forEach((p, k) => {
+      G.p.forEach((p, k) => {
         const b = document.createElement('button');
         b.type = 'button'; b.className = 'pl-pin'; b.dataset.i = i;
-        b.style.left = (p[0] / PW * 100) + '%'; b.style.top = (p[1] / PH * 100) + '%';
+        b.style.left = (p[0] / GIRO.w * 100) + '%'; b.style.top = (p[1] / GIRO.h * 100) + '%';
         b.style.setProperty('--d', (0.2 + i * 0.04 + k * 0.03) + 's');
         b.setAttribute('aria-label', 'Entrar: ' + a.nome);
         if (k) b.tabIndex = -1;
@@ -425,18 +436,88 @@ document.addEventListener('DOMContentLoaded', () => {
       box.addEventListener('focusout', () => marca(null));
       box.addEventListener('click', (e) => { const t = e.target.closest('[data-i]'); if (t) { marca(null); abreAmbiente(+t.dataset.i, t); } });
     });
+    iniciaGiro(marca);
     // a maquete inclina de leve seguindo o mouse
     if (finePointer && !reduce) {
       const st = document.getElementById('planStage');
       let raf = 0;
       st.addEventListener('pointermove', (e) => {
-        if (tour.dataset.fase !== 'planta') return;
+        if (tour.dataset.fase !== 'planta' || planModel.classList.contains('girando')) return;
         const r = st.getBoundingClientRect(), nx = (e.clientX - r.left) / r.width - 0.5, ny = (e.clientY - r.top) / r.height - 0.5;
         cancelAnimationFrame(raf);
         raf = requestAnimationFrame(() => { planModel.style.setProperty('--rx', (-ny * 5).toFixed(2) + 'deg'); planModel.style.setProperty('--ry', (nx * 6).toFixed(2) + 'deg'); });
       });
       st.addEventListener('pointerleave', () => { planModel.style.setProperty('--rx', '0deg'); planModel.style.setProperty('--ry', '0deg'); });
     }
+  }
+  // arrastar gira a maquete (quadro a quadro); um clique sem arrastar continua abrindo o ambiente
+  function iniciaGiro(marca) {
+    const cv = document.createElement('canvas');
+    const pequeno = window.innerWidth < 900;
+    cv.className = 'plan-giro'; cv.width = pequeno ? 800 : 1280; cv.height = pequeno ? 450 : 720;
+    planImg.after(cv);
+    const ctx = cv.getContext('2d');
+    const Q = new Array(GIRO.n);
+    // carrega do quadro de descanso para fora, para os vizinhos chegarem primeiro
+    const ordem = [GIRO.rest];
+    for (let d = 1; ordem.length < GIRO.n; d++) { if (GIRO.rest + d < GIRO.n) ordem.push(GIRO.rest + d); if (GIRO.rest - d >= 0) ordem.push(GIRO.rest - d); }
+    let fila = 0;
+    const proximo = () => {
+      if (fila >= ordem.length) return;
+      const k = ordem[fila++], im = new Image();
+      im.decoding = 'async';
+      im.onload = im.onerror = () => { if (im.naturalWidth) Q[k] = im; proximo(); };
+      im.src = giroSrc(k);
+    };
+    for (let j = 0; j < 4; j++) proximo();
+    let cur = GIRO.rest;
+    const desenha = (f) => {
+      const k = Math.max(0, Math.min(GIRO.n - 1, Math.round(f)));
+      let im = Q[k];
+      for (let d = 1; !im && d < GIRO.n; d++) im = Q[k - d] || Q[k + d];
+      if (im) ctx.drawImage(im, 0, 0, cv.width, cv.height);
+    };
+    let x0 = 0, f0 = 0, ativo = false, girou = false, volta = 0, anim = 0, id = null;
+    const POR_PX = () => (GIRO.n * 0.85) / planModel.clientWidth;   // atravessar a maquete ≈ quase toda a volta
+    const voltaPraFrente = () => {
+      const de = cur, t0 = performance.now(), dur = reduce ? 0 : 650;
+      cancelAnimationFrame(anim);
+      const passo = (t) => {
+        const p = dur ? Math.min(1, (t - t0) / dur) : 1, e = 1 - Math.pow(1 - p, 3);
+        cur = de + (GIRO.rest - de) * e; desenha(cur);
+        if (p < 1) anim = requestAnimationFrame(passo);
+        else { cur = GIRO.rest; planModel.classList.remove('girando'); }
+      };
+      anim = requestAnimationFrame(passo);
+    };
+    planModel.addEventListener('pointerdown', (e) => {
+      if (tour.dataset.fase !== 'planta' || (e.pointerType === 'mouse' && e.button !== 0)) return;
+      ativo = true; girou = false; x0 = e.clientX; f0 = cur; id = e.pointerId;
+      clearTimeout(volta); cancelAnimationFrame(anim);
+    });
+    planModel.addEventListener('pointermove', (e) => {
+      if (!ativo || e.pointerId !== id) return;
+      const dx = e.clientX - x0;
+      if (!girou) {
+        if (Math.abs(dx) < 6) return;
+        girou = true; marca(null);
+        planModel.setPointerCapture(id);
+        desenha(cur);
+        planModel.classList.add('girando', 'is-grab');
+      }
+      // arrastar para a esquerda gira a frente da maquete para a esquerda
+      cur = Math.max(0, Math.min(GIRO.n - 1, f0 - dx * POR_PX()));
+      desenha(cur);
+    });
+    const solta = (e) => {
+      if (!ativo || e.pointerId !== id) return;
+      ativo = false; planModel.classList.remove('is-grab');
+      if (girou) volta = setTimeout(voltaPraFrente, 900);
+    };
+    planModel.addEventListener('pointerup', solta);
+    planModel.addEventListener('pointercancel', solta);
+    // depois de girar, o clique que encerra o arraste não abre ambiente
+    planModel.addEventListener('click', (e) => { if (girou) { e.stopPropagation(); e.preventDefault(); girou = false; } }, true);
   }
   function fichaAndar(a) {
     andarAtual = a;
@@ -478,28 +559,46 @@ document.addEventListener('DOMContentLoaded', () => {
     if (aberto) return;
     if (fase === 'obra') paraTorre();
     aberto = true; ocupado = true; lastFocus = document.activeElement;
-    acende(0);
     fichaAndar(a);
     montaPlanta(); montaSlides();
-    preparaIda();
-    if (!vVolta.dataset.ok) {
-      vVolta.dataset.ok = '1';
-      vVolta.poster = M + 'sala-' + F.sfx + '.webp';
-      vVolta.preload = 'auto'; vVolta.src = M + 'rasante-volta-' + F.sfx + '.mp4';
-    }
     trava(true);
     slides.forEach((s) => { s.style.transition = 'none'; s.className = 'ap-slide'; });
     plan.classList.remove('is-in', 'dive');
     planModel.style.transformOrigin = '';
     tour.classList.remove('at-end', 'first');
+    tour.classList.add('corte');   // já prepara a planta parada e nítida para o corte (ver style.css)
     tour.dataset.fase = 'ida';
     tour.setAttribute('aria-hidden', 'false');
-    setTimeout(() => {
+    // o andar clicado continua aceso enquanto a câmera se aproxima dele; a planta abre por cima no fim
+    if (hoverA !== a) { hoverA = 0; acende(a); }
+    tip.classList.remove('show');
+    zoomAndar(a, () => {
       tour.classList.add('is-open');
       AMB.forEach((x, k) => carrega(k));
-      if (reduce || !vIda.src) { chegou(); return; }
-      tocar(vIda, chegou);
-    }, 40);
+      chegou();
+    });
+  }
+
+  // a câmera se aproxima do andar escolhido: a cena da torre cresce a partir do ponto daquele andar.
+  // é a mesma imagem, sem vídeo, então funciona para qualquer andar, de baixo ou de cima.
+  const ZOOM = 3.2, ZOOM_MS = 1100;
+  function zoomAndar(a, done) {
+    if (reduce) { done(); return; }
+    const [x, y] = mapa((F.x0 + F.x1) / 2, meio(a));
+    hero.classList.add('is-zooming');
+    stage.style.transition = 'none';
+    stage.style.transformOrigin = x.toFixed(1) + 'px ' + y.toFixed(1) + 'px';
+    void stage.offsetWidth;
+    stage.style.transition = 'transform ' + ZOOM_MS + 'ms cubic-bezier(.6,0,.2,1)';
+    stage.style.transform = 'scale(' + ZOOM + ')';
+    setTimeout(done, ZOOM_MS * 0.7);
+  }
+  // ao fechar a planta, a câmera volta para a torre inteira
+  function desfazZoom() {
+    if (!stage.style.transform) return;
+    stage.style.transition = reduce ? 'none' : 'transform 900ms cubic-bezier(.22,1,.36,1)';
+    stage.style.transform = '';
+    setTimeout(() => { hero.classList.remove('is-zooming'); stage.style.transition = ''; stage.style.transformOrigin = ''; }, reduce ? 0 : 950);
   }
   // o rasante termina na sala; dali a câmera sobe e a planta 3D se assenta
   function chegou() {
@@ -526,8 +625,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 2) planta → ambiente: a câmera mergulha no cômodo clicado e a foto se assenta
   function origemDe(i) {
-    const p = AMB[i].pins[0];
-    planModel.style.transformOrigin = (p[0] / PW * 100).toFixed(2) + '% ' + (p[1] / PH * 100).toFixed(2) + '%';
+    const p = GIRO.amb[AMB[i].id].p[0];
+    planModel.style.transformOrigin = (p[0] / GIRO.w * 100).toFixed(2) + '% ' + (p[1] / GIRO.h * 100).toFixed(2) + '%';
   }
   function abreAmbiente(i) {
     if (!aberto || ocupado || tour.dataset.fase !== 'planta') return;
@@ -577,10 +676,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!aberto || tour.dataset.fase !== 'planta' || ocupado) return;
     ocupado = true;
     tour.dataset.fase = 'saindo';
-    if (reduce || !vVolta.src) { plan.classList.remove('is-in'); setTimeout(fecha, 300); return; }
-    vVolta.currentTime = 0; vVolta.classList.add('on');
+    tour.classList.remove('corte');
     plan.classList.remove('is-in');
-    setTimeout(() => tocar(vVolta, fecha), 380);
+    setTimeout(fecha, reduce ? 0 : 300);
   }
   // galeria da seção 3: abre o cômodo em tela cheia na hora (sem rasante nem planta) e o X fecha
   function abreDireto(i, origem) {
@@ -720,8 +818,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!aberto || tour.dataset.fase === 'fechando') return;
     clearTimeout(vigia);
     tour.dataset.fase = 'fechando';
-    tour.classList.remove('is-open');
+    tour.classList.remove('corte', 'is-open');
     tour.setAttribute('aria-hidden', 'true');
+    desfazZoom();
     setTimeout(() => {
       tour.dataset.fase = 'fechado';
       vVolta.classList.remove('on'); vVolta.pause();
